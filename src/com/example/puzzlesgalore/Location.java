@@ -21,7 +21,7 @@ public class Location
      * coordinates are immutable.
      *
      * @param x
-     *            , the x coordinate of the location.
+     *            , the x coordinate of the location..
      * @param y
      *            , the y coordinate of the location.
      */
