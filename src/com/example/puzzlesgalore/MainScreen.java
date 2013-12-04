@@ -140,25 +140,4 @@ public class MainScreen
         blankSpaceLocation = currentLoc;
     }
 
-    /**
-     * Returns an array of subdivisions of a specified picture. The number of
-     * divisions is dependent on the size of the puzzle.
-     *
-     * @param image
-     *            , the image to be divided
-     * @param size
-     *            , the size of the puzzle.
-     * @return dividedPicture, an array of image divisions.
-     */
-    /**
-     * public void dividePicture(Image image) { for (int i = 0; i <
-     * image.getWidth(); i++) { for (int j = 0; j < image.getHeight(); j++) {
-     * imageColor = image.getPixel(i, j); imageColorArray[i][j] = imageColor; }
-     * } int numDivisions = (size ^ 2); int subImageWidth = image.getWidth() /
-     * numDivisions; int subImageHeight = image.getHeight() / numDivisions; for
-     * (int i = 0; i < numDivisions; i++) { for (int j = 0; j < numDivisions;
-     * j++) { // imageArray[i][j] = imageColorArray[i][j]; subImageWidth +=
-     * subImageWidth; subImageHeight += subImageHeight; } } }
-     */
-
 }
