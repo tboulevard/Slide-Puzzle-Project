@@ -15,20 +15,18 @@ import sofia.graphics.Color;
  * @author Timothy Street (timvt)
  * @author Filip Gouglev (gfilip1)
  * @author Ryan Bishop (ryanb79)
- * @version 12.11.2013
+ * @version 12.08.2013
  */
 
 public class MainScreen
     extends ShapeScreen
 {
-    private int               size           = 5;
+    private int               size           = 3;
     private Puzzle            puzzleBoard;
     private PuzzleTile[][]    tileCell;
     private PuzzleTile        currentTile;
     private float             puzzleDimension;
     private float             tileDimension;
-    private float             widthSpace;
-    private float             heightSpace;
     private boolean           easySelected   = true;
     private boolean           mediumSelected = false;
     private boolean           hardSelected   = false;
@@ -128,7 +126,6 @@ public class MainScreen
 
     }
 
-
     public void setNewBlankSpace()
     {
         puzzleBoard.setBlankSpace(currentLoc, blankSpaceLocation);
@@ -136,7 +133,10 @@ public class MainScreen
             new Location(blankSpaceLocation.x(), blankSpaceLocation.y());
         blankSpaceLocation = currentLoc;
         currentTile.setFillColor(Color.black);
-        tileCell[newTile.x()][newTile.y()].setImage(imageArray[currentLoc.y()][currentLoc.x()]);
+        Image currentImage = imageArray[currentLoc.x()][currentLoc.y()];
+        tileCell[newTile.x()][newTile.y()].setImage(currentImage);
+        imageArray[currentLoc.x()][currentLoc.y()] = imageArray[newTile.x()][newTile.y()];
+        imageArray[newTile.x()][newTile.y()] = currentImage;
         blankSpaceLocation = currentLoc;
     }
 
