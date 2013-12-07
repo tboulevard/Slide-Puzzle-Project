@@ -1,4 +1,4 @@
-package com.example.puzzlesgalore;
+package cs2114.groupproject.pokeslidepuzzle;
 
 /**
  * This class is an abstraction that represents an (x, y) coordinate pair. It

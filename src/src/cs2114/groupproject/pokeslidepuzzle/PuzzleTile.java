@@ -1,4 +1,4 @@
-package com.example.puzzlesgalore;
+package cs2114.groupproject.pokeslidepuzzle;
 
 import sofia.graphics.Color;
 import sofia.graphics.RectangleShape;
@@ -14,6 +14,14 @@ import sofia.graphics.RectangleShape;
 
 public class PuzzleTile extends RectangleShape
 {
+    // ----------------------------------------------------------
+    /**
+     * Create a new PuzzleTile object.
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     */
     public PuzzleTile(float left, float top, float right, float bottom)
     {
         super(left, top, right, bottom);

@@ -1,4 +1,4 @@
-package com.example.puzzlesgalore;
+package cs2114.groupproject.pokeslidepuzzle;
 
 public interface PLocation
 {

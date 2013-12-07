@@ -1,4 +1,4 @@
-package com.example.puzzlesgalore;
+package cs2114.groupproject.pokeslidepuzzle;
 
 import sofia.graphics.Image;
 import java.awt.*;
@@ -17,7 +17,6 @@ public class Puzzle
     private int[][]   puzzleBoard;
     private int       blankSpace;
     private Location  blankSpaceLocation;
-
 
     /**
      * Class constructor. Instantiates the size and dimensions of the puzzle
