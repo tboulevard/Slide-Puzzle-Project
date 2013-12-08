@@ -2,12 +2,12 @@ package cs2114.groupproject.pokeslidepuzzle;
 
 // -------------------------------------------------------------------------
 /**
- *  Write a one-sentence summary of your class here.
- *  Follow it with additional details about its purpose, what abstraction
- *  it represents, and how to use it.
+ * This class handles all tests for the Puzzle class.
  *
- *  @author Tim
- *  @version Nov 14, 2013
+ * @author Timothy Street (timvt)
+ * @author Filip Gouglev (gfilip1)
+ * @author Ryan Bishop (ryanb79)
+ * @version 12.08.2013
  */
 public class PuzzleTest
     extends student.TestCase

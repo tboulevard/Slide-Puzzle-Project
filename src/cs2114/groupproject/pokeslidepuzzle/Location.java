@@ -7,7 +7,7 @@ package cs2114.groupproject.pokeslidepuzzle;
  * @author Timothy Street (timvt)
  * @author Filip Gouglev (gfilip1)
  * @author Ryan Bishop (ryanb79)
- * @version 12.11.2013
+ * @version 12.08.2013
  */
 public class Location
     implements PLocation
@@ -55,6 +55,9 @@ public class Location
 
 
     /**
+     * Returns a new location one cell north of the location this method is
+     * called on.
+     *
      * @return a new location one cell to the north of the Location set by the
      *         constructor.
      */
@@ -66,6 +69,9 @@ public class Location
 
 
     /**
+     * Returns a new location one cell south of the location this method is
+     * called on.
+     *
      * @return a new location one cell to the south of the Location set by the
      *         constructor.
      */
@@ -77,6 +83,9 @@ public class Location
 
 
     /**
+     * Returns a new location one cell east of the location this method is
+     * called on.
+     *
      * @return a new location one cell to the east of the Location set by the
      *         constructor.
      */
@@ -88,6 +97,9 @@ public class Location
 
 
     /**
+     * Returns a new location one cell west of the location this method is
+     * called on.
+     *
      * @return a new location one cell to the west of the Location set by the
      *         constructor.
      */

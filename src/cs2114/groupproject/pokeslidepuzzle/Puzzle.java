@@ -1,8 +1,5 @@
 package cs2114.groupproject.pokeslidepuzzle;
 
-import sofia.graphics.Image;
-import java.awt.*;
-
 /**
  * This class is a representation of the puzzle board model.
  *
@@ -13,14 +10,13 @@ import java.awt.*;
  */
 public class Puzzle
 {
-    private int       size;
-    private int[][]   puzzleBoard;
-    private int       blankSpace;
-    private Location  blankSpaceLocation;
+    private int      size;
+    private int[][]  puzzleBoard;
+    private int      blankSpace;
 
     /**
-     * Class constructor. Instantiates the size and dimensions of the puzzle
-     * board.
+     * Class constructor. Instantiates the size, dimensions of the puzzle board,
+     * and the blank space location.
      *
      * @param size
      *            , the size of the puzzle
@@ -40,7 +36,6 @@ public class Puzzle
             }
         }
         blankSpace = puzzleBoard[size - 1][size - 1];
-        blankSpaceLocation = new Location(size - 1, size - 1);
     }
 
 
@@ -54,14 +49,17 @@ public class Puzzle
         return size;
     }
 
+
     /**
      * Gets the cell and returns it's reference. The reference is a number
-     * 1-(size^2). E.g.: A board with size 3 will have tile references ranging
-     * from 1-9.
+     * (size^2 - 1). E.g.: A board with size 3 will have tile references ranging
+     * from 0-8. getCell() returns -1 if the specified cell is not within the
+     * bounds of the puzzle.
      *
      * @param loc
      *            , the location to get the reference from.
-     * @return int, the number reference of the tile.
+     * @return puzzleBoard[loc.x()][loc.y()], if the number reference of the
+     *         tile. -1, if the cell is not within the bounds of the puzzle.
      */
     public int getCell(PLocation loc)
     {
@@ -70,7 +68,7 @@ public class Puzzle
         {
             return puzzleBoard[loc.x()][loc.y()];
         }
-        return 0;
+        return -1;
     }
 
 
@@ -99,8 +97,10 @@ public class Puzzle
     /**
      * Sets a new blank space reference.
      *
-     * @param newLoc, the new location for the blank space
-     * @param prevLoc, the old location for the blank space
+     * @param newLoc
+     *            , the new location for the blank space
+     * @param prevLoc
+     *            , the old location for the blank space
      */
     public void setBlankSpace(PLocation newLoc, PLocation prevLoc)
     {
@@ -114,7 +114,9 @@ public class Puzzle
      * Returns cell contents to the east of the specified cell.
      *
      * @param loc
-     *            , the cell's location.
+     *            , the cell's location on the board.
+     * @return getCell(loc.east()), the integer tile reference on the board 1
+     *         cell east of the specified location.
      */
     public int getCellEast(PLocation loc)
     {
@@ -126,7 +128,9 @@ public class Puzzle
      * Returns cell contents to the west of the specified cell.
      *
      * @param loc
-     *            , the cell's location.
+     *            , the cell's location on the board.
+     * @return getCell(loc.west()), the integer tile reference on the board 1
+     *         cell west of the specified location.
      */
     public int getCellWest(PLocation loc)
     {
@@ -139,6 +143,8 @@ public class Puzzle
      *
      * @param loc
      *            , the cell's location.
+     * @return getCell(loc.south()), the integer tile reference on the board 1
+     *         cell south of the specified location.
      */
     public int getCellSouth(PLocation loc)
     {
@@ -151,6 +157,8 @@ public class Puzzle
      *
      * @param loc
      *            , the cell's location.
+     * @return getCell(loc.north()), the integer tile reference on the board 1
+     *         cell north of the specified location.
      */
     public int getCellNorth(PLocation loc)
     {
