@@ -23,10 +23,6 @@ import android.view.View.OnClickListener;
 public class PuzzleSolvedActivity
     extends Activity
 {
-    private TextView  scoreText;
-    private ImageView imgView;
-
-
     @Override
     /**
      * Instantiates a new instance of this activity.
@@ -34,14 +30,15 @@ public class PuzzleSolvedActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.puzzle_solved_activity);
-        scoreText = (TextView)findViewById(R.id.scoreText);
-        imgView = (ImageView)findViewById(R.id.imgView);
+        setContentView(R.layout.puzzlesolvedactivity);
+        TextView scoreText = (TextView)findViewById(R.id.scoreText);
+        ImageView imgView = (ImageView)findViewById(R.id.imgView);
         scoreText.setText("Great job!");
         Bitmap b1 =
             BitmapFactory.decodeResource(getResources(), R.drawable.pikachu2);
         imgView.setImageBitmap(b1);
         restartButtonClickListener();
+        quitClickListener();
     }
 
 
@@ -60,7 +57,21 @@ public class PuzzleSolvedActivity
                     new Intent(PuzzleSolvedActivity.this, MainScreen.class);
                 startActivity(myIntent);
                 finish();
-                return;
+            }
+        });
+    }
+
+    /**
+     * Handles the activity that quits out of the app completely.
+     */
+    public void quitClickListener()
+    {
+        Button quit = (Button)findViewById(R.id.quit);
+        quit.setOnClickListener(new OnClickListener() {
+
+            public void onClick(View view)
+            {
+                finish();
             }
         });
     }

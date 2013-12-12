@@ -31,6 +31,6 @@ public class PuzzleTile
     public PuzzleTile(float left, float top, float right, float bottom)
     {
         super(left, top, right, bottom);
-        setColor(Color.black);
+        setFillColor(Color.black);
     }
 }

@@ -13,6 +13,7 @@ public class Puzzle
     private int      size;
     private int[][]  puzzleBoard;
     private int      blankSpace;
+    private Location blankSpaceLocation;
 
     /**
      * Class constructor. Instantiates the size, dimensions of the puzzle board,
@@ -36,6 +37,7 @@ public class Puzzle
             }
         }
         blankSpace = puzzleBoard[size - 1][size - 1];
+        blankSpaceLocation = new Location(size - 1, size - 1);
     }
 
 
@@ -71,6 +73,15 @@ public class Puzzle
         return -1;
     }
 
+    /**
+     * Gets the current blankSpaceLocation.
+     *
+     * @return blankSpaceLocation, the Location of the blank space on the board.
+     */
+    public Location getBlankSpaceLocation()
+    {
+        return blankSpaceLocation;
+    }
 
     /**
      * Determines whether a cell at a specified location is adjacent to a blank

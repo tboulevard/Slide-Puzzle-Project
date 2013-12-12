@@ -1,5 +1,7 @@
 package cs2114.groupproject.pokeslidepuzzle;
 
+import android.widget.TextView;
+import android.widget.ImageView;
 import android.content.Intent;
 import sofia.util.Random;
 import android.graphics.BitmapFactory;
@@ -21,7 +23,7 @@ import sofia.graphics.Color;
 public class MainScreen
     extends ShapeScreen
 {
-    private static final int SIZE        = 4;
+    private static final int SIZE          = 4;
     private Puzzle           puzzleBoard;
     private PuzzleTile[][]   tileCell;
     private PuzzleTile       currentTile;
@@ -31,8 +33,16 @@ public class MainScreen
     private Location         blankSpaceLocation;
     private Image[][]        randomizedImageArray;
     private Image[][]        imageArray;
-    private Random           random      = new Random();
-    private int              randomImage = 0;
+    private Random           random        = new sofia.util.Random();
+    private ImageView        imageRef;
+    private int              numMoves;
+    private TextView         movesView;
+    private int              randomPicture = 0;
+    private Bitmap           b1;
+    private Bitmap           b2;
+    private Bitmap           b3;
+    private Bitmap           b4;
+    private Bitmap           b5;
 
 
     /**
@@ -41,6 +51,10 @@ public class MainScreen
      */
     public void initialize()
     {
+
+        numMoves = 0;
+        movesView.setText("Moves: 0");
+
         puzzleBoard = new Puzzle(SIZE);
         tileCell = new PuzzleTile[SIZE][SIZE];
         imageArray = new Image[SIZE][SIZE];
@@ -65,10 +79,7 @@ public class MainScreen
                 add(tileCell[i][j]);
             }
         }
-
-        this.setImageReference();
         blankSpaceLocation = new Location(SIZE - 1, SIZE - 1);
-
         tileCell[blankSpaceLocation.x()][blankSpaceLocation.y()]
             .setFillColor(Color.black);
     }
@@ -77,32 +88,32 @@ public class MainScreen
     /**
      * Generates a PuzzleTile with an undivided image below the Puzzle board to
      * use as reference.
+     *
+     * @param picNum
+     *            is the randomly generated value;
      */
-    private void setImageReference()
+    public void setImageReference(int picNum)
     {
-        PuzzleTile imageRefTile =
-            new PuzzleTile(140, 500, getWidth() - 140, getHeight() - 10);
-        if (randomImage == 0)
+        if (picNum == 0)
         {
-            imageRefTile.setImage("pikachu.png");
+            imageRef.setImageBitmap(b1);
         }
-        else if (randomImage == 1)
+        else if (picNum == 1)
         {
-            imageRefTile.setImage("charizard.png");
+            imageRef.setImageBitmap(b2);
         }
-        else if (randomImage == 2)
+        else if (picNum == 2)
         {
-            imageRefTile.setImage("snorlax.png");
+            imageRef.setImageBitmap(b3);
         }
-        else if (randomImage == 3)
+        else if (picNum == 3)
         {
-            imageRefTile.setImage("jigglypuff.png");
+            imageRef.setImageBitmap(b4);
         }
         else
         {
-            imageRefTile.setImage("gyarados.png");
+            imageRef.setImageBitmap(b5);
         }
-        add(imageRefTile);
     }
 
 
@@ -120,23 +131,19 @@ public class MainScreen
     {
         int width = bmImage.getWidth();
         int height = bmImage.getHeight();
-
         int col = width / SIZE;
         int row = height / SIZE;
-
         for (int i = 0; i < SIZE; i++)
         {
             for (int j = 0; j < SIZE; j++)
             {
                 int x = col * j;
                 int y = row * i;
-
                 Bitmap bitmapImage =
                     Bitmap.createBitmap(bmImage, x, y, col, row);
                 Image image = new Image(bitmapImage);
-                imageArray[j][i] = image; // Kept constant for solution
-                randomizedImageArray[j][i] = image; // Randomized later to
-// generate random board
+                imageArray[j][i] = image;
+                randomizedImageArray[j][i] = image;
             }
         }
     }
@@ -180,20 +187,21 @@ public class MainScreen
         {
             int xCoord = (int)(x / tileDimension);
             int yCoord = (int)(y / tileDimension);
-
             currentTile = tileCell[xCoord][yCoord];
             currentLoc = new Location(xCoord, yCoord);
             if (puzzleBoard.adjacentToBlankSpace(currentLoc))
             {
                 this.setNewBlankSpace();
-
+                numMoves++;
+                movesView.setText("Moves: " + numMoves + "");
             }
-        }
 
+        }
         if (this.checkSolved())
         {
             Intent intent = new Intent(this, PuzzleSolvedActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
 
@@ -204,18 +212,23 @@ public class MainScreen
      */
     public void selectRandomPicture()
     {
-        int randomPicture = random.nextInt(0, 4);
-        randomImage = randomPicture;
+        int currentRandomPicture = randomPicture;
+
+        while (randomPicture == currentRandomPicture)
+        {
+            randomPicture = random.nextInt(0, 4);
+        }
+
         if (randomPicture == 0)
         {
-            Bitmap b1 =
+            b1 =
                 BitmapFactory
                     .decodeResource(getResources(), R.drawable.pikachu);
             divideImage(b1);
         }
         else if (randomPicture == 1)
         {
-            Bitmap b2 =
+            b2 =
                 BitmapFactory.decodeResource(
                     getResources(),
                     R.drawable.charizard);
@@ -223,14 +236,14 @@ public class MainScreen
         }
         else if (randomPicture == 2)
         {
-            Bitmap b3 =
+            b3 =
                 BitmapFactory
                     .decodeResource(getResources(), R.drawable.snorlax);
             divideImage(b3);
         }
         else if (randomPicture == 3)
         {
-            Bitmap b4 =
+            b4 =
                 BitmapFactory.decodeResource(
                     getResources(),
                     R.drawable.jigglypuff);
@@ -238,12 +251,13 @@ public class MainScreen
         }
         else
         {
-            Bitmap b5 =
+            b5 =
                 BitmapFactory.decodeResource(
                     getResources(),
                     R.drawable.gyarados);
             divideImage(b5);
         }
+        setImageReference(randomPicture);
     }
 
 
@@ -317,10 +331,8 @@ public class MainScreen
         Image tile13 = randomizedImageArray[0][3];
         Image tile14 = randomizedImageArray[1][3];
         Image tile15 = randomizedImageArray[2][3];
+        int puzzleNum = random.nextInt(0, 1);
 
-        int puzzleNum = random.nextInt(0, 1); // Chooses from 2 different
-        // randomizations
-        // -------Comment out for demo (to show that checkSolved works)--------
         if (puzzleNum == 0)
         {
             randomizedImageArray[0][0] = tile7;
@@ -339,7 +351,7 @@ public class MainScreen
             randomizedImageArray[1][3] = tile4;
             randomizedImageArray[2][3] = tile10;
         }
-        else if (puzzleNum == 1)
+        else
         {
             randomizedImageArray[0][0] = tile7;
             randomizedImageArray[1][0] = tile9;
@@ -357,7 +369,26 @@ public class MainScreen
             randomizedImageArray[1][3] = tile5;
             randomizedImageArray[2][3] = tile14;
         }
+    }
 
-        //---------------------------------------------------------------------
+
+    /**
+     * This method returns the 'Puzzle' which contains the reference
+     * information.
+     *
+     * @return returns the puzzle.
+     */
+    public Puzzle getPuzzle()
+    {
+        return puzzleBoard;
+    }
+
+
+    /**
+     * Resets the board to a different puzzle.
+     */
+    public void resetClicked()
+    {
+        initialize();
     }
 }
