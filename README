@@ -1,1 +1,11 @@
-This is a repository for the slide puzzle project I worked on in the Fall of 2013.
+This is a repository for the slide puzzle project I worked on in the Fall 2013 
+offering of CS 2114 - Software Design & Data Structures. We designed our game
+to take in *any* picture and reformat it to fit on our slide puzzle board.
+
+The project was open ended with the following requirements:
+  
+  1. Must be an Android application.
+  2. Must ultilize an algorithm in a useful or interesting way.
+  3. Must be a game or utility.
+  
+We were also required to write our own JUnit and Android test cases.
